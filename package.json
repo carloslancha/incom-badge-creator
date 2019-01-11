@@ -5,10 +5,11 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
+    "dist": "npm run package-mac && npm run package-win && npm run package-linux",
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icons/INCOM.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icons/INCOM.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
-    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=icons/INCOM.png --prune=true --out=release-builds"
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icons/INCOM.icns --prune=true --out=releases",
+    "package-win": "electron-packager .  --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icons/INCOM.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"INCOM Badge Creator\"",
+    "package-linux": "electron-packager .  --overwrite --asar=true --platform=linux --arch=x64 --icon=icons/INCOM.png --prune=true --out=releases"
   },
   "author": "Carlos Lancha",
   "license": "BSD",
