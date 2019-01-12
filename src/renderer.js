@@ -28,7 +28,6 @@ inputs.forEach((element) => {
 	element.addEventListener('click', (event) => {
 		let node = event.currentTarget;
 		prompt({
-			title: node.parentElement.querySelector('text:not([data-name="Input"]').innerHTML,
 			value: node.getAttribute('data-value') || node.parentElement.id,
 		})
 		.then((result) => {
