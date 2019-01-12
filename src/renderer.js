@@ -9,10 +9,11 @@ const prompt = require('electron-prompt');
 const win = require('electron').remote.getCurrentWindow();
 
 const qualificationButtons = document.querySelectorAll('#Officials g, #Style_Judges g');
-const inputs = document.querySelectorAll('#Input, [data-name="Input"]');
+const inputs = document.querySelectorAll('#Data #Name_Input, #Data #Nationality_Input, #Special_Rank #Special_Rank_Input');
 const photoButton = document.querySelector('#Photo');
 const saveButton = document.querySelector('#save');
 
+//Qualifications
 qualificationButtons.forEach((element) => {
 	element.addEventListener('click', (event) => {
 		let inactiveNode = event.currentTarget.querySelector('[data-name="Inactive"]') || 
@@ -22,6 +23,7 @@ qualificationButtons.forEach((element) => {
 	});
 });
 
+//Data Input
 inputs.forEach((element) => {
 	element.addEventListener('click', (event) => {
 		let node = event.currentTarget;
@@ -35,7 +37,7 @@ inputs.forEach((element) => {
 				node.innerHTML = result;
 
 				if (node.parentElement.id === 'Special_Rank') {
-					let container = node.parentElement.querySelector('#Bottom');
+					let container = node.parentElement.querySelector('#Background');
 					let containerWidth = container.getBBox().width;
 
 					let nodeWidth = node.getBBox().width;
@@ -47,6 +49,7 @@ inputs.forEach((element) => {
 	});
 });
 
+//Photo
 photoButton.addEventListener('click', () => {
 	dialog.showOpenDialog(
 		{
@@ -63,7 +66,7 @@ photoButton.addEventListener('click', () => {
 			}
 
 			let img = filepaths[0];
-			let target = document.querySelector('#Photo_frame');
+			let target = document.querySelector('#Photo');
 			let photoText = document.querySelector('#Photo text');
 			let targetBBox = target.getBBox();
 
@@ -75,14 +78,18 @@ photoButton.addEventListener('click', () => {
 				imageNode.setAttribute('xlink:href', img);
 			}
 			else {
+				debugger;
 				let out = `<image xlink:href="${img}" width="${targetBBox.width}" x="${targetBBox.x}" y="${targetBBox.y}" />`;
 				target.insertAdjacentHTML('beforeend', out);
+
+				photoButton.querySelector('#Photo_frame').style.display = 'none';
 			}
 
 			return;
 	});
 });
 
+//Save
 saveButton.addEventListener('click', (event) => {
 	dialog.showSaveDialog(
 		{
